@@ -15,5 +15,7 @@ export default function (currentState, action) {
                 ...currentState,
                 providers: action.data
             }
+        default:
+            return currentState
     }
 }
