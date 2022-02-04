@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       {providers.map(provider => (
         <div>
-          <h3> {provider.name} <Link to={`/appointment/new${provider.id}`}>New Appointment</Link></h3>
+          <h3> {provider.name} <Link to={`/appointment/new/${provider.id}`}>New Appointment</Link></h3>
           <AppointmentList provider_id={provider.id} />
         </div>
       ))}

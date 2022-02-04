@@ -1,5 +1,62 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import appointmentContext from '../appointmentContext';
 
 export default function NewAppointment() {
-  return <div><h2> New Appointment</h2></div>;
+    const [date, setDate] = useState()
+    const [patient,setPatient] = useState()
+    const params = useParams()
+    const navigate = useNavigate()
+    const { dispatch }= useContext(appointmentContext)
+
+
+    const handleSubmit = async (event) => {
+        
+        event.preventDefault()
+        dispatch({
+            type: "addAppointment",
+            appointment: { 
+                date: date, 
+                provider_id: params.provider_id, 
+                patient: patient, 
+                new_patient: false
+            }
+        })
+        navigate("/")
+    }
+
+    return ( 
+      <div>
+          <h2> New Appointemnt </h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="date">Date</label>
+                <input 
+                    onChange={event => setDate(event.target.value)} 
+                    value={date} 
+                    type="text"
+                />
+            </div>
+            <div>
+                <label htmlFor="patient">Patient</label>
+                <input 
+                    type="text" 
+                    value={patient}
+                    onChange={event => setPatient(event.target.value)}    
+                />
+            </div>
+           <button>Add</button>
+          </form>
+      </div>
+  )
 }
+
+
+{/* <label for="cars">Choose a car:</label>
+
+<select name="cars" id="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>  */}

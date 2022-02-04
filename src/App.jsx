@@ -11,9 +11,9 @@ const initialState = {
     { id: 1, name: "Dr. Jane Doe" }, 
     { id: 2, name: "Dr. Karl Marx" }],
   appointments: [
-    { id: 1, date: "2021-02-03", provider_id: 1, patient: "David Smith" },
-    { id: 2, date: "2021-02-04", provider_id: 1, patient: "Ben Smith" },
-    { id: 3, date: "2021-02-05", provider_id: 2, patient: "Jane Smith" },
+    { id: 1, date: "2021-02-03", provider_id: 1, patient: "David Smith", new_patient: true},
+    { id: 2, date: "2021-02-04", provider_id: 1, patient: "Ben Smith", new_patient: true},
+    { id: 3, date: "2021-02-05", provider_id: 2, patient: "Jane Smith", new_patient: false},
   ],
 };
 
