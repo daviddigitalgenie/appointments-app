@@ -1,27 +1,36 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import appointmentContext from '../appointmentContext';
+import axios from 'axios';
 
 export default function NewAppointment() {
     const [date, setDate] = useState()
     const [patient,setPatient] = useState()
     const params = useParams()
     const navigate = useNavigate()
-    const { dispatch }= useContext(appointmentContext)
+    const { state, state: { appointments }, dispatch }= useContext(appointmentContext)
 
+    const authAxios = axios.create({
+        baseURL: import.meta.env.VITE_API_URL,
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
 
     const handleSubmit = async (event) => {
         
         event.preventDefault()
+        const res = await authAxios.post('appointments', {
+            date: date, 
+            provider_id: params.provider_id, 
+            patient: patient, 
+        })
+
         dispatch({
             type: "addAppointment",
-            appointment: { 
-                date: date, 
-                provider_id: params.provider_id, 
-                patient: patient, 
-                new_patient: false
-            }
+            appointment: res.data
         })
+
         navigate("/")
     }
 
