@@ -5,16 +5,22 @@ export default function (currentState, action) {
                 ...currentState,
                 appointments: [action.appointment, ...currentState.appointments]
             }
-        case "setAppointments":
+        case "setToken":
             return {
                 ...currentState,
-                appointments: action.data
+                token: action.data.token
             }
         case "setProviders":
             return {
                 ...currentState,
-                providers: action.data
+                providers: action.providers
+                }
+        case "setAppointments":
+            return {
+                ...currentState,
+                appointments: action.appointments
             }
+
         default:
             return currentState
     }
